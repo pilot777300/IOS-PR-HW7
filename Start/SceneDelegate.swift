@@ -10,14 +10,10 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var coordinator: MainCoordinator?
+    var coordinator: AppCoordinator?
+
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-   //-------
-        let navController = UINavigationController()
-        coordinator = MainCoordinator(navigationController: navController)
-        coordinator?.start()
-    //--------
         
         let factory = MyLoginFactory()
               let loginInspector = factory.makeLoginInspector()
@@ -26,34 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = navController //-----
-        self.window?.makeKeyAndVisible()
+        coordinator = AppCoordinator(window: window!)
+        coordinator?.start()
+    }
+
   
-    }
-    
-    func createFeedViewController() -> UINavigationController {
-        let feedViewController =  LogInViewController()
-        
-        feedViewController.title = "Лента"
-        feedViewController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "doc.richtext"), tag: 0)
-        return UINavigationController(rootViewController: feedViewController)
-    }
-    
-    func createProfileViewController() -> UINavigationController {
-   let profileViewController = ProfileViewController()
- 
-   profileViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.circle"), tag: 1)
-   return UINavigationController(rootViewController: profileViewController)
-   }
-    
-    func createTabBarController() -> UITabBarController {
-        let tabBarController = UITabBarController()
-        UITabBar.appearance().backgroundColor = .systemGray4
-        tabBarController.viewControllers = [createFeedViewController(), createProfileViewController()]
-        return tabBarController
-    }
-    
-    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

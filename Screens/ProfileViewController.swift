@@ -12,6 +12,8 @@ import iOSIntPackage
 
 class ProfileViewController: UIViewController {
    
+    var coordinator: ProfileFlow?
+    
     lazy var topView: ProfileHeaderView = {
         let tv = ProfileHeaderView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -33,15 +35,51 @@ class ProfileViewController: UIViewController {
         user.avatar = UIImage(named: "arrow.png") ?? UIImage(systemName: "person")!
         
         #else
-        user.fullName = "Герой неба"
+        user.fullName = "Изобретатель"
         user.status = "Отдыхаю"
-        user.avatar = UIImage(named: "A330-300.jpg") ?? UIImage(systemName: "person")!
+        user.avatar = UIImage(named: "Avatarka1") ?? UIImage(systemName: "person")!
         #endif
         
-          postData.append(Post(author: "Elon Musk", description: "Ну классный самолет. Ветерок на посадке только слишком сильно дунул", image: "A330-300.jpg", lokes: 12, views: 33))
-        postData.append(Post(author: "Юрий Шевчук", description: "Всюду черти! надави брат, на педаль.", image: "Brothers.tiff", lokes: 50, views: 55))
-        postData.append(Post(author: "Cергей Крокодилов", description: "Как тебе такое, Илон Маск?", image: "Boston.jpg", lokes: 132, views: 4567))
-        postData.append(Post(author: "Donald Trump", description: "Wow!!! Wonderfull Kukuruznik", image: "Aeroplan.jpeg", lokes: 243, views: 427))
+        let postauthor = "Типичный инженер"
+        let postText = "Посмотри какая мощь, какая красота и грация!"
+        let postImage = "A330-300"
+        let likes = 500
+        let views = 20
+        let post = Post(author: postauthor, description: postText, image: postImage, lokes: likes, views: views)
+        postData.append(post)
+        
+        
+        let postauthor2 = "Настоящий Роботостроитель"
+        let postText2 = "Зацените мое новое детище"
+        let postImage2 = "Boston"
+        let likes2 = 520
+        let views2 = 34
+        let post2 = Post(author: postauthor2, description: postText2, image: postImage2, lokes: likes2, views: views2)
+        postData.append(post2)
+        
+        let postauthor3 = "Ничегонеделатель"
+        let postText3 = "Хочу спать и есть"
+        let postImage3 = "fox"
+        let likes3 = 35
+        let views3 = 27
+        let post3 = Post(author: postauthor3, description: postText3, image: postImage3, lokes: likes3, views: views3)
+        postData.append(post3)
+        
+//        let viewModel = PostViewModel(post: post)
+//        let view = Postview()
+        
+//       view.postAuthor.text = viewModel.author
+//        view.postTxt.text = viewModel.description
+//       view.postImage.image = UIImage(named: viewModel.image)
+       // view.likes.text = viewModel.likes
+      //  view.views = viewModel.views
+        
+        
+        
+//          postData.append(Post(author: "Elon Musk", description: "Ну классный самолет. Ветерок на посадке только слишком сильно дунул", image: "A330-300.jpg", lokes: 12, views: 33))
+//        postData.append(Post(author: "Юрий Шевчук", description: "Всюду черти! надави брат, на педаль.", image: "Brothers.tiff", lokes: 50, views: 55))
+//        postData.append(Post(author: "Cергей Крокодилов", description: "Как тебе такое, Илон Маск?", image: "Boston.jpg", lokes: 132, views: 4567))
+//        postData.append(Post(author: "Donald Trump", description: "Wow!!! Wonderfull Kukuruznik", image: "Aeroplan.jpeg", lokes: 243, views: 427))
         
         setTableView()
         setConstraints()
@@ -55,7 +93,7 @@ class ProfileViewController: UIViewController {
             tableView.separatorColor = UIColor.black
             tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
             tableView.backgroundColor = .systemGray5
-            tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "Cell")
+            tableView.register(Postview.self, forCellReuseIdentifier: "Cell")
             tableView.translatesAutoresizingMaskIntoConstraints = false
         }
         func setConstraints() {
@@ -77,7 +115,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return postData.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard  let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PostTableViewCell
+       guard  let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? Postview
         else {fatalError()}
         
         let thePost = postData[indexPath.row]
@@ -115,8 +153,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func showGallery(sender: UIButton) {
-       let vc = PhotosViewController()
-          navigationController?.pushViewController(vc, animated: true)
+        coordinator?.openPhotosViewController()
         
     }
 }

@@ -9,8 +9,11 @@ import UIKit
 import iOSIntPackage
 
 
+
 class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
  
+    var coordinator: PhotosCoordinator?
+    
    public let publisherFasade = ImagePublisherFacade()
     
     private lazy var scroll: UIScrollView = {
@@ -49,22 +52,22 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
         scroll.addSubview(cv)
         setConstraints()
         publisherFasade.subscribe(self)
-        publisherFasade.addImagesWithTimer(time: 0.5, repeat: 10, userImages: newPic)
+        publisherFasade.addImagesWithTimer(time: 0.5, repeat: 10, userImages: picGallery)
         
             }
     
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
                     {
-                return newPic.count
+                return picGallery.count
             }
     
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
                     {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeaderCell", for: indexPath)  as! PhotosCollectionViewCell
                cell.backgroundColor = UIColor.green
-              let pic = newPic[indexPath.row]
+              let pic = picGallery[indexPath.row]
                cell.image.image = pic
-                    receive(images: newPic)
+                    receive(images: picGallery)
               collectionView.reloadData()
                return cell
             }
@@ -108,7 +111,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
  
         extension PhotosViewController: ImageLibrarySubscriber {
             func receive(images: [UIImage]) {
-            newPic = images
+                picGallery = images
             cv.reloadData()
         }
     }

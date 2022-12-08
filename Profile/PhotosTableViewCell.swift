@@ -8,12 +8,12 @@
 import UIKit
 import iOSIntPackage
 
-public struct Pictures {
-    var picture: String?
-}
-    public var picturesAPI = [Pictures]()
+//public struct PhotoGallery {
+//    var picture: String?
+//}
+    public var picturesAPI = [PhotoGallery]()
 
-    public var newPic = [UIImage]()
+    public var picGallery = [UIImage]()
     public var em = [UIImage]()
 
 class PhotosTableViewCell: UITableViewCell {
@@ -55,27 +55,27 @@ class PhotosTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
        
         
-        newPic.append(UIImage(named: "cat.jpg")!)
-        newPic.append(UIImage(named: "helicopter.jpeg")!)
-        newPic.append(UIImage(named: "A330-300.jpg")!)
-        newPic.append(UIImage(named: "fox.jpeg")!)
-        newPic.append(UIImage(named: "cat.jpg")!)
-        newPic.append(UIImage(named: "arrow.png")!)
-        newPic.append(UIImage(named: "Aeroplan.jpeg")!)
-        newPic.append(UIImage(named: "volf.jpeg")!)
+        picGallery.append(UIImage(named: "cat.jpg")!)
+        picGallery.append(UIImage(named: "helicopter.jpeg")!)
+        picGallery.append(UIImage(named: "A330-300.jpg")!)
+        picGallery.append(UIImage(named: "fox.jpeg")!)
+        picGallery.append(UIImage(named: "cat.jpg")!)
+        picGallery.append(UIImage(named: "arrow.png")!)
+        picGallery.append(UIImage(named: "Aeroplan.jpeg")!)
+        picGallery.append(UIImage(named: "volf.jpeg")!)
         
         
-        picturesAPI.append(Pictures(picture: "A330-300.jpg"))
-        picturesAPI.append(Pictures(picture: "Boston.jpg"))
-        picturesAPI.append(Pictures(picture: "logo.png"))
-        picturesAPI.append(Pictures(picture: "Aeroplan.jpeg"))
-        picturesAPI.append(Pictures(picture: "Brothers.tiff"))
-        picturesAPI.append(Pictures(picture: "Avatarka1.jpg"))
-        picturesAPI.append(Pictures(picture: "arrow.png"))
-        picturesAPI.append(Pictures(picture: "fox.jpeg"))
-        picturesAPI.append(Pictures(picture: "cat.jpg"))
-        picturesAPI.append(Pictures(picture: "volf.jpeg"))
-        picturesAPI.append(Pictures(picture: "helicopter.jpeg"))
+        picturesAPI.append(PhotoGallery(picture: "A330-300.jpg"))
+        picturesAPI.append(PhotoGallery(picture: "Boston.jpg"))
+        picturesAPI.append(PhotoGallery(picture: "logo.png"))
+        picturesAPI.append(PhotoGallery(picture: "Aeroplan.jpeg"))
+        picturesAPI.append(PhotoGallery(picture: "Brothers.tiff"))
+        picturesAPI.append(PhotoGallery(picture: "Avatarka1.jpg"))
+        picturesAPI.append(PhotoGallery(picture: "arrow.png"))
+        picturesAPI.append(PhotoGallery(picture: "fox.jpeg"))
+        picturesAPI.append(PhotoGallery(picture: "cat.jpg"))
+        picturesAPI.append(PhotoGallery(picture: "volf.jpeg"))
+        picturesAPI.append(PhotoGallery(picture: "helicopter.jpeg"))
     }
     
     required init?(coder: NSCoder) {

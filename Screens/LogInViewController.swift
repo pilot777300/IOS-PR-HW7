@@ -9,9 +9,10 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-   
+    var coordinator: StartFlow?
+    
      private lazy var loginButton: CustomButton = {
-        let button = CustomButton(buttonTitle: "CUSTOM BUTTON" , buttonColor: .red) { [self] in
+         let button = CustomButton(buttonTitle: "Войти" , buttonColor: .blue) { [self] in
             loginButtonPressed()
         }
        return button
@@ -90,10 +91,12 @@ class LogInViewController: UIViewController {
    
      func loginButtonPressed() {
        
-        let profileViewController = ProfileViewController()
+   
         if  loginDelegate.check(login: email.text!, password: password.text!) == true
                               {
-             self.navigationController?.pushViewController(profileViewController, animated: true)
+            coordinator?.openProfileViewController()
+            coordinator?.coordinateToTabBar()
+            
         } else {
 
             let alert = UIAlertController(title: "Ошибка",

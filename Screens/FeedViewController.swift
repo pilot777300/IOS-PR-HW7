@@ -9,6 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
+    var coordinator: FeedCoordinator?
     
     private lazy var checkGuessButton: CustomButton = {
         let button = CustomButton(buttonTitle: "ПРОВЕРИТЬ", buttonColor: .systemBlue) { [unowned self]  in
